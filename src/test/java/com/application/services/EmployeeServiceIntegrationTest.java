@@ -1,7 +1,7 @@
 package com.application.services;
 
-import com.application.entity.Employee;
-import com.application.repository.IEmployeeRepository;
+import com.application.employee.entity.Employee;
+import com.application.employee.repository.IEmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
