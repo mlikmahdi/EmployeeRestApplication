@@ -1,4 +1,4 @@
-package com.application.core.dto;
+package dto;
 
 public interface IGenericDto {
     Long getId();

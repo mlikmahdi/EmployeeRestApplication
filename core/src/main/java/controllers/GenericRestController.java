@@ -1,13 +1,13 @@
-package com.application.core.controllers;
+package controllers;
 
-import com.application.core.entities.IGenericEntity;
-import com.application.core.dto.IGenericDto;
-import com.application.core.execptions.ElementNotFoundException;
-import com.application.core.services.GenericService;
+import dto.IGenericDto;
+import entities.IGenericEntity;
+import execptions.ElementNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.GenericService;
 
 import java.util.Set;
 

@@ -1,10 +1,10 @@
-package com.application.core.services;
+package services;
 
-import com.application.core.dto.IGenericDto;
-import com.application.core.entities.IGenericEntity;
-import com.application.core.mappers.IGenericMapper;
-import com.application.core.repositories.IGenericRepository;
+import dto.IGenericDto;
+import entities.IGenericEntity;
 import lombok.AllArgsConstructor;
+import mappers.IGenericMapper;
+import repositories.IGenericRepository;
 
 import java.util.HashSet;
 import java.util.Optional;

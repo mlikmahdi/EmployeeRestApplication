@@ -1,4 +1,4 @@
-package com.application.core.mappers;
+package mappers;
 
 import org.mapstruct.MappingTarget;
 

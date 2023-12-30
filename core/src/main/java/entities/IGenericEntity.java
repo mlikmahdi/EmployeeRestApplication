@@ -1,4 +1,4 @@
-package com.application.core.entities;
+package entities;
 
 public interface IGenericEntity {
 

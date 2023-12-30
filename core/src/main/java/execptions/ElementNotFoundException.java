@@ -1,4 +1,4 @@
-package com.application.core.execptions;
+package execptions;
 
 public class ElementNotFoundException extends RuntimeException {
     public ElementNotFoundException(Long id) {

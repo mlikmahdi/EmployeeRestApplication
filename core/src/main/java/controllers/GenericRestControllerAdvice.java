@@ -1,6 +1,6 @@
-package com.application.core.controllers;
+package controllers;
 
-import com.application.core.execptions.ElementNotFoundException;
+import execptions.ElementNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
