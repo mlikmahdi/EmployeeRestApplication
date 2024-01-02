@@ -20,5 +20,10 @@ public interface IStatisticsControllerApi {
     @Operation(description = "Calcule le nombre moyen de projet par employé")
     @ApiResponse(responseCode = "200", description = "Nombre moyen de projet par employé",
             content = { @Content(mediaType = "application/json") })
-    EmployeeStatisticsDto getaverageProjectPerEmployee();
+    EmployeeStatisticsDto getAverageProjectPerEmployee();
+
+    @Operation(description = "Retourne le pourcentage d'employé par département")
+    @ApiResponse(responseCode = "200", description = "Pourcentage d'employé par département",
+            content = { @Content(mediaType = "application/json") })
+    EmployeeStatisticsDto getPercentageEmployeeByDepartment();
 }

@@ -26,7 +26,13 @@ public class StatisticsControllerApi implements IStatisticsControllerApi {
 
     @Override
     @GetMapping("/employees/projects/average")
-    public EmployeeStatisticsDto getaverageProjectPerEmployee() {
+    public EmployeeStatisticsDto getAverageProjectPerEmployee() {
         return statisticsService.getAverageProjectPerEmployee();
+    }
+
+    @Override
+    @GetMapping("/employees/department/distribution")
+    public EmployeeStatisticsDto getPercentageEmployeeByDepartment() {
+        return statisticsService.getPercentageEmployeeByDepartment();
     }
 }

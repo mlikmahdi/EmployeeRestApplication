@@ -8,10 +8,7 @@ import com.application.statistics.dto.EmployeeStatisticsDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,6 +59,22 @@ public class StatisticsService {
         EmployeeStatisticsDto employeeStatisticsDto = new EmployeeStatisticsDto();
 
         employeeStatisticsDto.setAverageProjectPerEmployee((double) (totalProjects/totalEmployees));
+
+        return employeeStatisticsDto;
+    }
+
+    public EmployeeStatisticsDto getPercentageEmployeeByDepartment() {
+        Integer totalEmployees = employeeService.getTotalEmployees();
+        Map<String, Double> countEmployeesByDepartment = employeeService.getCountEmployeesByDepartment();
+        EmployeeStatisticsDto employeeStatisticsDto = new EmployeeStatisticsDto();
+
+        Map<String, Double> percentageByDepartment = new HashMap<>();
+        for(String key : countEmployeesByDepartment.keySet()) {
+            double countEmployees = (double) countEmployeesByDepartment.get(key) / totalEmployees * 100;
+            percentageByDepartment.put(key, countEmployees);
+        }
+
+        employeeStatisticsDto.setPercentageEmployeeByDepartment(percentageByDepartment);
 
         return employeeStatisticsDto;
     }

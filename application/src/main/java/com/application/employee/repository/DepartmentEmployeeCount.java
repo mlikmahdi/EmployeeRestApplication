@@ -3,12 +3,12 @@ package com.application.employee.repository;
 import lombok.Data;
 
 @Data
-public class CountEmployeeByDepartment {
+public class DepartmentEmployeeCount {
 
     private String departmentName;
-    private Integer employeeCount;
+    private Long employeeCount;
 
-    public CountEmployeeByDepartment(String departmentName, Integer employeeCount) {
+    public DepartmentEmployeeCount(String departmentName, Long employeeCount) {
         this.departmentName = departmentName;
         this.employeeCount = employeeCount;
     }
