@@ -68,11 +68,11 @@ public class StatisticsService {
         Map<String, Double> countEmployeesByDepartment = employeeService.getCountEmployeesByDepartment();
         EmployeeStatisticsDto employeeStatisticsDto = new EmployeeStatisticsDto();
 
-        Map<String, Double> percentageByDepartment = new HashMap<>();
-        for(String key : countEmployeesByDepartment.keySet()) {
-            double countEmployees = (double) countEmployeesByDepartment.get(key) / totalEmployees * 100;
-            percentageByDepartment.put(key, countEmployees);
-        }
+        Map<String, Double> percentageByDepartment = countEmployeesByDepartment.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> (double) entry.getValue() / totalEmployees * 100
+                ));
 
         employeeStatisticsDto.setPercentageEmployeeByDepartment(percentageByDepartment);
 
