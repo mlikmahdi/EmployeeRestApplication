@@ -21,7 +21,7 @@ public class EmployeeDto implements IGenericDto {
     private String role;
 
     @Valid
-    private LocalDate startDate;
+    private LocalDate hireDate;
 
     @Valid
     private DepartmentDto department;

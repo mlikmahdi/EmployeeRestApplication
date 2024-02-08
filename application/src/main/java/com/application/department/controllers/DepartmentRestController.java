@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/department")
+@RequestMapping("/departments")
 public class DepartmentRestController extends GenericRestController<Department, DepartmentDto> {
     public DepartmentRestController(DepartmentService departmentService) {
         super(departmentService);

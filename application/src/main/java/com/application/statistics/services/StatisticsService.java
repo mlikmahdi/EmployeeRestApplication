@@ -47,7 +47,7 @@ public class StatisticsService {
         return employeesByDepartment.stream()
                 .min(
                         Comparator.comparing(
-                                EmployeeDto::getStartDate
+                                EmployeeDto::getHireDate
                         )
                 );
     }

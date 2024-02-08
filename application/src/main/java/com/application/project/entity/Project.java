@@ -14,6 +14,7 @@ import java.util.Set;
 @Entity
 @RequiredArgsConstructor
 @Data
+@Table(name = "projects")
 public class Project implements IGenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

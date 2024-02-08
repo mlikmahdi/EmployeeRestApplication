@@ -17,7 +17,7 @@ public abstract class GenericRestController<E extends IGenericEntity, D extends 
     private final GenericService<E, D> genericService;
 
     @Override
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<Set<D>> getAll() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(genericService.findAll());
@@ -31,14 +31,14 @@ public abstract class GenericRestController<E extends IGenericEntity, D extends 
     }
 
     @Override
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity<D> create(@RequestBody D dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(genericService.create(dto));
     }
 
     @Override
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<D> update(@RequestBody D dto) {
         D body = genericService.update(dto).orElseThrow(() -> new ElementNotFoundException(dto.getId()));
         return ResponseEntity.status(HttpStatus.OK)

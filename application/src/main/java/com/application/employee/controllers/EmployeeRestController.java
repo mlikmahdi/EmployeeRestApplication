@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeRestController extends GenericRestController<Employee, EmployeeDto> {
 
     private final EmployeeService employeeService;
@@ -22,7 +22,7 @@ public class EmployeeRestController extends GenericRestController<Employee, Empl
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/department/{id}")
+    @GetMapping("/departments/{id}")
     public Set<EmployeeDto> getEmployeesByDepartmentId(@PathVariable Long id) {
         return employeeService.getEmployeesByDepartmentId(id);
     }

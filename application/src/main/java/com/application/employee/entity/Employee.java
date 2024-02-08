@@ -15,6 +15,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Data
+@Table(name = "employees")
 public class Employee implements IGenericEntity {
 
     private @Id @GeneratedValue Long id;
@@ -31,7 +32,7 @@ public class Employee implements IGenericEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "employee_project",
+            name = "employees_projects",
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )

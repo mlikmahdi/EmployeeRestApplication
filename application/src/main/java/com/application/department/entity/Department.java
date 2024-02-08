@@ -13,6 +13,7 @@ import java.util.Set;
 @Entity
 @Data
 @RequiredArgsConstructor
+@Table(name = "departments")
 public class Department implements IGenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import services.GenericService;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("/projects")
 public class ProjectRestController extends GenericRestController<Project, ProjectDto> {
     public ProjectRestController(GenericService<Project, ProjectDto> projectService) {
         super(projectService);
