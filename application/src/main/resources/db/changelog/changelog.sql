@@ -1,21 +1,88 @@
--- changeset Mahdi M'LIK:1
-ALTER TABLE employee ADD CONSTRAINT fk_employee_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE SET NULL;
-ALTER TABLE employee_project
-    ADD CONSTRAINT fk_employee_project_employee
-        FOREIGN KEY (employee_id) REFERENCES employee(id)
-            ON DELETE CASCADE;
+-- Liquibase formatted sql
 
-ALTER TABLE employee_project
-    ADD CONSTRAINT fk_employee_project_project
-        FOREIGN KEY (project_id) REFERENCES project(id)
-            ON DELETE CASCADE;
+-- changeset Mahdi M'LIK:1
+create table departments
+(
+    id   bigserial
+        primary key,
+    name varchar(255)
+);
+
+create table employees
+(
+    id            bigint not null
+        primary key,
+    hire_date     date   not null,
+    name          varchar(255),
+    role          varchar(255),
+    department_id bigint
+        constraint fk_employees_departments
+            references departments
+            on delete set null
+);
+
+create table projects
+(
+    id          bigserial
+        primary key,
+    description varchar(255),
+    end_date    date,
+    name        varchar(255),
+    start_date  date
+);
+
+create table employees_projects
+(
+    employee_id bigint not null
+        constraint fk_employees_projects_employees
+            references employees
+            on delete cascade,
+    project_id  bigint not null
+        constraint fk_employees_projects_projects
+            references projects
+            on delete cascade,
+    primary key (employee_id, project_id)
+);
+
+create table roles
+(
+    id   bigint not null
+        primary key,
+    name varchar(255)
+);
+
+create table users
+(
+    id       bigint  not null
+        primary key,
+    enable   boolean not null,
+    password varchar(255),
+    username varchar(255)
+);
+
+create table users_roles
+(
+    users_id bigint not null
+        constraint fk_users_roles_users
+            references users,
+    roles_id bigint not null
+        constraint fk_users_roles_roles
+            references roles,
+    primary key (users_id, roles_id)
+);
 
 -- changeset Mahdi M'LIK:2
-INSERT INTO roles (name) VALUES ('USER');
-INSERT INTO roles (name) VALUES ('DEV');
-INSERT INTO roles (name) VALUES ('ADMIN');
+INSERT INTO roles (id, name) VALUES (1, 'DEV');
+INSERT INTO roles (id, name) VALUES (2, 'MANAGER');
+INSERT INTO roles (id, name) VALUES (3, 'ADMIN');
 
-INSERT INTO users (username, password, enable) VALUES ('admin', '$2a$10$IqTJTjn39IU5.7sSCDQxzu3xug6z/LPU6IF0azE/8CkHCwYEnwBX.', '1');
-INSERT INTO users (username, password, enable) VALUES ('mahdi', '$2a$10$E6OjKPVC3T64V9pBPpE66.KQAqH9t4cOKLrnhqFSmlwVu8rcHw89K', '1');
-INSERT INTO users_roles (users_id, roles_id) VALUES (1, 3); -- user admin has role ADMIN
-INSERT INTO users_roles (users_id, roles_id) VALUES (2, 2); -- user mahdi has role DEV
+INSERT INTO users (id, username, password, enable) VALUES (1, 'dev', '$2y$10$vAhzfnonCnkIYYqwnJi7e.B4juLAzHiTkr/ScOigmY1xhBMpaXpA6', '1');
+INSERT INTO users (id, username, password, enable) VALUES (2, 'manager', '$2y$10$fxTqEGgMnJmiakhrQQ/P0uNPHMrEvIctqofWjtJXNGplEvGT.lMuO', '1');
+INSERT INTO users (id, username, password, enable) VALUES (3, 'admin', '$2y$10$GJFWXgPYVPgFIZfG4nsgeO48aiulnB1.HXFV3k30TGF.vAwZUuzK.', '1');
+
+INSERT INTO users_roles (users_id, roles_id) VALUES (1, 1); -- user dev has role DEV
+INSERT INTO users_roles (users_id, roles_id) VALUES (2, 1); -- user manager has role DEV
+INSERT INTO users_roles (users_id, roles_id) VALUES (2, 2); -- user manager has role MANAGER
+INSERT INTO users_roles (users_id, roles_id) VALUES (3, 1); -- user admin has role DEV
+INSERT INTO users_roles (users_id, roles_id) VALUES (3, 2); -- user admin has role MANAGER
+INSERT INTO users_roles (users_id, roles_id) VALUES (3, 3); -- user admin has role ADMIN
