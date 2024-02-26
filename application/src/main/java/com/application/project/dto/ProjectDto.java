@@ -2,24 +2,24 @@ package com.application.project.dto;
 
 
 import dto.IGenericDto;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
 import java.time.LocalDate;
 
-@Data
-public class ProjectDto implements IGenericDto {
+@Builder
+public record ProjectDto(
+        @NotNull
+        String code,
+        @NotNull
+        String name,
+        String description,
 
-    @Schema(hidden = true)
-    private Long id;
-
-    private String name;
-
-    private String description;
-
-    @Valid
-    private LocalDate startDate;
-
-    private LocalDate endDate;
+        LocalDate startDate,
+        LocalDate endDate
+) implements IGenericDto {
+        @Override
+        public String id() {
+                return code;
+        }
 }

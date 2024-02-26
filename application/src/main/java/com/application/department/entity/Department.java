@@ -1,25 +1,30 @@
 package com.application.department.entity;
 
 import com.application.employee.entity.Employee;
+import entities.GenericEntity;
 import entities.IGenericEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
-@RequiredArgsConstructor
+@Getter
+@Setter
+@ToString
 @Table(name = "departments")
-public class Department implements IGenericEntity {
+public class Department extends GenericEntity implements IGenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false, unique = true)
+    private String code;
+
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "department")

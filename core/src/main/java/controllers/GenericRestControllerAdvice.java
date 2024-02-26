@@ -1,25 +1,44 @@
 package controllers;
 
+import dto.ErrorResponseDto;
 import execptions.ElementNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
-@ControllerAdvice
+import java.time.LocalDateTime;
+
+@RestControllerAdvice
 public class GenericRestControllerAdvice {
-    @ResponseBody
     @ExceptionHandler(ElementNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    String handleElementNotFoundException(ElementNotFoundException ex) {
-        return ex.getMessage();
+    ErrorResponseDto handleElementNotFoundException(ElementNotFoundException ex, WebRequest webRequest) {
+        return ErrorResponseDto.builder()
+                .apiPath(webRequest.getDescription(false))
+                .errorCode(HttpStatus.NOT_FOUND)
+                .errorMessage(ex.getMessage())
+                .errorTime(LocalDateTime.now())
+                .build();
     }
 
-    @ResponseBody
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    String handleIllegalArgumentException(IllegalArgumentException ex) {
-        return ex.getMessage();
+    ErrorResponseDto handleIllegalArgumentException(IllegalArgumentException ex, WebRequest webRequest) {
+        return ErrorResponseDto.builder()
+                .apiPath(webRequest.getDescription(false))
+                .errorCode(HttpStatus.BAD_REQUEST)
+                .errorMessage(ex.getMessage())
+                .errorTime(LocalDateTime.now())
+                .build();
     }
+
+    @ExceptionHandler(Exception.class)
+    ErrorResponseDto handleGeneralException(Exception ex, WebRequest webRequest) {
+        return ErrorResponseDto.builder()
+                .apiPath(webRequest.getDescription(false))
+                .errorCode(HttpStatus.INTERNAL_SERVER_ERROR)
+                .errorMessage(ex.getMessage())
+                .errorTime(LocalDateTime.now())
+                .build();
+    }
+
+
 }

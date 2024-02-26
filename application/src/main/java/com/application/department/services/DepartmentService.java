@@ -9,8 +9,7 @@ import services.GenericService;
 
 @Service
 public class DepartmentService extends GenericService<Department, DepartmentDto> {
-
     public DepartmentService(IDepartmentRepository repository, IDepartmentMapper mapper) {
-        super(repository, mapper);
+        super(repository::findByCode, repository, mapper);
     }
 }

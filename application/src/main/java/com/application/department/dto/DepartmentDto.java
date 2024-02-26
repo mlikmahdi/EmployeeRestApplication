@@ -2,13 +2,19 @@ package com.application.department.dto;
 
 import dto.IGenericDto;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Builder;
 
-@Data
-public class DepartmentDto implements IGenericDto {
+@Builder
+public record DepartmentDto(
+        @NotNull
+        String code,
 
-    private Long id;
+        @NotNull
+        String name
+) implements IGenericDto {
 
-    @NotNull
-    private String name;
+        @Override
+        public String id() {
+                return code;
+        }
 }

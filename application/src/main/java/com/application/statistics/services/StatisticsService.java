@@ -28,7 +28,7 @@ public class StatisticsService {
 
         employeeStatisticsByDepartmentDto.setRoleDistribution(getRoleDistribution(employeesByDepartment));
 
-        getOldestEmployeeName(employeesByDepartment).ifPresent(employeeDto -> employeeStatisticsByDepartmentDto.setOldestEmployee(employeeDto.getName()));
+        getOldestEmployeeName(employeesByDepartment).ifPresent(employeeDto -> employeeStatisticsByDepartmentDto.setOldestEmployee(employeeDto.name()));
 
         return employeeStatisticsByDepartmentDto;
     }
@@ -37,7 +37,7 @@ public class StatisticsService {
         return employeesByDepartment.stream()
                 .collect(
                         Collectors.groupingBy(
-                                EmployeeDto::getRole,
+                                EmployeeDto::role,
                                 Collectors.counting()
                         )
                 );
@@ -47,7 +47,7 @@ public class StatisticsService {
         return employeesByDepartment.stream()
                 .min(
                         Comparator.comparing(
-                                EmployeeDto::getHireDate
+                                EmployeeDto::hireDate
                         )
                 );
     }

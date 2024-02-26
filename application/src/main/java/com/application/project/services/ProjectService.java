@@ -12,7 +12,7 @@ public class ProjectService extends GenericService<Project, ProjectDto> {
 
     private final IProjectRepository repository;
     public ProjectService(IProjectRepository repository, IProjectMapper mapper) {
-        super(repository, mapper);
+        super(repository::findByCode, repository, mapper);
         this.repository = repository;
     }
 

@@ -25,9 +25,9 @@ public abstract class GenericRestController<E extends IGenericEntity, D extends 
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<D> getOne(@PathVariable Long id) {
+    public ResponseEntity<D> getOne(@PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(genericService.getById(id).orElseThrow(() -> new ElementNotFoundException(id)));
+                .body(genericService.getBy(id).orElseThrow(() -> new ElementNotFoundException(id)));
     }
 
     @Override
@@ -40,15 +40,15 @@ public abstract class GenericRestController<E extends IGenericEntity, D extends 
     @Override
     @PutMapping
     public ResponseEntity<D> update(@RequestBody D dto) {
-        D body = genericService.update(dto).orElseThrow(() -> new ElementNotFoundException(dto.getId()));
+        D body = genericService.update(dto).orElseThrow(() -> new ElementNotFoundException(dto.id()));
         return ResponseEntity.status(HttpStatus.OK)
                 .body(body);
     }
 
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<D> delete(@PathVariable Long id) {
-        D body = genericService.delete(id).orElseThrow(() -> new ElementNotFoundException(id));
+    public ResponseEntity<D> delete(@PathVariable String id) {
+        D body = genericService.delete(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(body);
     }

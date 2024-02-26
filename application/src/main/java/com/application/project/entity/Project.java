@@ -1,32 +1,39 @@
 package com.application.project.entity;
 
 import com.application.employee.entity.Employee;
+import entities.GenericEntity;
 import entities.IGenericEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@RequiredArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name = "projects")
-public class Project implements IGenericEntity {
+public class Project extends GenericEntity implements IGenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false, unique = true)
+    private String code;
+
+    @Column(nullable = false)
     private String name;
 
     private String description;
 
+    @Column(name = "start_date")
     private LocalDate startDate;
 
+    @Column(name = "end_date")
     private LocalDate endDate;
 
     @ManyToMany(mappedBy = "projects")

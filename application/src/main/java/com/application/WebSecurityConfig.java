@@ -23,6 +23,7 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/employees").hasRole("MANAGER")
                                 .requestMatchers(HttpMethod.POST, "/employees").hasRole("MANAGER")
                                 .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole("ADMIN")
+                                .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 );
 
         http.httpBasic(Customizer.withDefaults());

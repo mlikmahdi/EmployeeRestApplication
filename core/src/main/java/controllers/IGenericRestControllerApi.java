@@ -19,7 +19,7 @@ public interface IGenericRestControllerApi<D> {
     @Operation(description = "Retourne un élément par son ID")
     @ApiResponse(responseCode = "200", description = "Élément trouvé",
             content = { @Content(mediaType = "application/json") })
-    ResponseEntity<D> getOne(@PathVariable Long id);
+    ResponseEntity<D> getOne(@PathVariable String id);
 
     @Operation(description = "Crée un élément")
     @ApiResponse(responseCode = "201", description = "Élément crée",
@@ -33,5 +33,5 @@ public interface IGenericRestControllerApi<D> {
 
     @Operation(description = "Supprime un élément par son ID")
     @ApiResponse(responseCode = "200", description = "Élément supprimé")
-    ResponseEntity<D> delete(@PathVariable Long id);
+    ResponseEntity<D> delete(@PathVariable String id);
 }

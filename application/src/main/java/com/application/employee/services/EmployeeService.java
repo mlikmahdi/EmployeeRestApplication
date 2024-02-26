@@ -20,7 +20,7 @@ public class EmployeeService extends GenericService<Employee, EmployeeDto> {
 
     private final IEmployeeMapper mapper;
     public EmployeeService(IEmployeeRepository repository, IEmployeeMapper mapper) {
-        super(repository, mapper);
+        super(repository::findByMatricule, repository, mapper);
         this.repository = repository;
         this.mapper = mapper;
     }

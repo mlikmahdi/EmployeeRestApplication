@@ -2,32 +2,42 @@ package com.application.employee.entity;
 
 import com.application.department.entity.Department;
 import com.application.project.entity.Project;
+import entities.GenericEntity;
 import entities.IGenericEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name = "employees")
-public class Employee implements IGenericEntity {
+public class Employee extends GenericEntity implements IGenericEntity {
 
-    private @Id @GeneratedValue Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotNull
+    @Column(unique = true, nullable = false, length = 20)
+    private String matricule;
+
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
+    @Column(nullable = false)
     private String role;
 
+    @Column(nullable = false)
+    private LocalDate hireDate;
+
     @ManyToOne
-    @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "FK_employee_department", value = ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "department_id")
     private Department department;
 
     @ManyToMany
@@ -37,13 +47,4 @@ public class Employee implements IGenericEntity {
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private Set<Project> projects = new HashSet<>();
-
-    @NotNull
-    @Column(nullable = false)
-    private LocalDate hireDate;
-
-    public Employee(String name, String role) {
-        this.name = name;
-        this.role = role;
-    }
 }

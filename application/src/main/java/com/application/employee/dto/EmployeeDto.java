@@ -4,27 +4,29 @@ import com.application.department.dto.DepartmentDto;
 import com.application.project.dto.ProjectDto;
 import dto.IGenericDto;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.util.Set;
 
-@Data
-public class EmployeeDto implements IGenericDto {
+@Builder
+public record EmployeeDto(
+        @NotNull
+        @Schema(description = "Employee's code with letters and numbers")
+        String matricule,
+        @NotNull
+        String name,
+        @NotNull
+        String role,
+        @NotNull
+        LocalDate hireDate,
+        DepartmentDto department,
+        Set<ProjectDto> projects
+) implements IGenericDto {
 
-    @Schema(hidden = true)
-    private Long id;
-
-    private String name;
-
-    private String role;
-
-    @Valid
-    private LocalDate hireDate;
-
-    @Valid
-    private DepartmentDto department;
-
-    private Set<ProjectDto> projects;
+        @Override
+        public String id() {
+                return matricule;
+        }
 }
