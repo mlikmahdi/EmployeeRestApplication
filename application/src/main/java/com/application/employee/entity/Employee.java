@@ -3,7 +3,6 @@ package com.application.employee.entity;
 import com.application.department.entity.Department;
 import com.application.project.entity.Project;
 import entities.GenericEntity;
-import entities.IGenericEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,13 +17,9 @@ import java.util.Set;
 @Setter
 @ToString
 @Table(name = "employees")
-public class Employee extends GenericEntity implements IGenericEntity {
+public class Employee extends GenericEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true, nullable = false, length = 20)
+    @Column(unique = true, nullable = false, updatable = false, length = 20)
     private String matricule;
 
     @Column(nullable = false)
@@ -33,7 +28,7 @@ public class Employee extends GenericEntity implements IGenericEntity {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "hire_date")
     private LocalDate hireDate;
 
     @ManyToOne

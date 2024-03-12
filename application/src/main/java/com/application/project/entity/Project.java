@@ -2,8 +2,10 @@ package com.application.project.entity;
 
 import com.application.employee.entity.Employee;
 import entities.GenericEntity;
-import entities.IGenericEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,10 +19,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Table(name = "projects")
-public class Project extends GenericEntity implements IGenericEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Project extends GenericEntity {
 
     @Column(nullable = false, unique = true)
     private String code;

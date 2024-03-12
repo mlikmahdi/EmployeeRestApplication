@@ -1,14 +1,11 @@
 package com.application.employee.dto;
 
-import com.application.department.dto.DepartmentDto;
-import com.application.project.dto.ProjectDto;
 import dto.IGenericDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Builder
 public record EmployeeDto(
@@ -21,8 +18,7 @@ public record EmployeeDto(
         String role,
         @NotNull
         LocalDate hireDate,
-        DepartmentDto department,
-        Set<ProjectDto> projects
+        String departmentCode
 ) implements IGenericDto {
 
         @Override

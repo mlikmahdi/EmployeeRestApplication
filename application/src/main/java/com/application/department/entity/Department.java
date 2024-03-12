@@ -2,7 +2,6 @@ package com.application.department.entity;
 
 import com.application.employee.entity.Employee;
 import entities.GenericEntity;
-import entities.IGenericEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +15,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Table(name = "departments")
-public class Department extends GenericEntity implements IGenericEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Department extends GenericEntity {
 
     @Column(nullable = false, unique = true)
     private String code;
